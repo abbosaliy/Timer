@@ -1,10 +1,9 @@
-# .github/workflows/deploy.yml
 name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - main # yoki master, sizning branchingiz qanday bo‘lsa
+      - main
 
 jobs:
   deploy:
