@@ -1,17 +1,26 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './App.css';
+import Button from './components/Button';
+import Input from './components/Input';
 
 function App() {
   const [inputValue, setInputValue] = useState<number>(0);
   const [time, setTime] = useState<number>(0);
-  const [running, setRunning] = useState(false);
+  const [running, setRunning] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!running || time == 0) return;
+    if (!running) return;
 
     const interval = setInterval(() => {
-      setTime((prev) => prev - 1);
-    }, 1000);
+      setTime((tm) => {
+        if (tm > 0) {
+          return tm - 0.01;
+        } else {
+          return 0;
+        }
+      });
+    }, 10);
+
     return () => clearInterval(interval);
   }, [running, time]);
 
@@ -21,37 +30,45 @@ function App() {
       setTime(inputValue);
     }
   }
+
   function timePause() {
+    setRunning(false);
+  }
+
+  function reset() {
+    setTime(inputValue);
     setRunning(false);
   }
 
   return (
     <div className="timerBox">
       <h2>Zeit festlegen</h2>
-      <input
+      <Input
         value={inputValue}
-        onChange={(e) => setInputValue(Number(e.target.value))}
-        className="timerInput"
         type="number"
+        onchange={(e) => setInputValue(Number(e.target.value))}
+        className="timerInput"
       />
       <div className="timeBox">
         <p>Time left</p>
         <span>{time.toFixed(3)}</span>
       </div>
       <div className="allBtn">
-        <button
-          onClick={() => handleStartTimer()}
+        <Button
+          onclick={handleStartTimer}
+          title="start"
           className="btn start"
-        >
-          Start
-        </button>
-        <button
+        />
+        <Button
+          onclick={timePause}
+          title="Pause"
           className="btn pause"
-          onClick={() => timePause()}
-        >
-          Pause
-        </button>
-        <button className="btn rest">Rest</button>
+        />
+        <Button
+          onclick={reset}
+          title="Reset"
+          className="btn rest"
+        />
       </div>
     </div>
   );
