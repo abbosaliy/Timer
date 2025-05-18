@@ -32,7 +32,11 @@ function App() {
   }
 
   function timePause() {
-    setRunning(false);
+    if (running) {
+      setRunning(false);
+    } else {
+      setRunning(true);
+    }
   }
 
   function reset() {
@@ -61,7 +65,7 @@ function App() {
         />
         <Button
           onclick={timePause}
-          title="Pause"
+          title={running ? ' Pause' : 'Resume'}
           className="btn pause"
         />
         <Button
