@@ -19,7 +19,7 @@ function App() {
           return 0;
         }
       });
-    }, 10);
+    }, 50);
 
     return () => clearInterval(interval);
   }, [running, time]);
