@@ -46,7 +46,7 @@ function App() {
 
   return (
     <div className="timerBox">
-      <h2>Zeit festlegen</h2>
+      <h2>Zeit in Sekunden festlegen</h2>
       <Input
         value={inputValue}
         type="number"

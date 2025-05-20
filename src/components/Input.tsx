@@ -14,6 +14,7 @@ function Input({ value, onchange, className = '', type = '' }: InputProps) {
       onChange={onchange}
       className={className}
       type={type}
+      placeholder="Sekunden eingeben"
     />
   );
 }
